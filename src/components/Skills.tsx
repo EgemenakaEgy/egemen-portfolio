@@ -112,7 +112,7 @@ export default function Skills() {
           <SectionEyebrow label="Skills" style={revealStyle(inView)} />
 
           {/* Right — content */}
-          <div className="transition-all duration-700" style={revealStyle(inView, 150)}>
+          <div className="transition-all duration-700 min-w-0" style={revealStyle(inView, 150)}>
             <h2 className="text-[32px] sm:text-[38px] lg:text-[42px] font-bold text-slate-900 leading-[1.1] tracking-[-0.025em] mb-12 text-balance">
               Technologien &{" "}
               <span className="text-slate-500 font-normal">Werkzeuge</span>

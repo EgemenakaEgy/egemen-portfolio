@@ -40,12 +40,12 @@ export default function Hero() {
       <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-white via-transparent to-white opacity-70" />
       <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-white via-transparent to-white opacity-50" />
 
-      <div className="relative max-w-6xl mx-auto px-6 sm:px-8 lg:px-8 w-full pt-20">
+      <div className="relative max-w-6xl mx-auto px-6 sm:px-8 lg:px-8 w-full min-w-0 pt-20">
         <div className="grid lg:grid-cols-[1fr_340px] gap-12 lg:gap-16 xl:gap-20 items-center py-12 sm:py-16 md:py-20 lg:py-24">
 
           {/* Left column */}
           <div
-            className={`flex flex-col gap-6 transition-none ${
+            className={`flex flex-col gap-6 min-w-0 transition-none ${
               mounted ? "animate-slide-up" : "opacity-0"
             }`}
           >
@@ -75,7 +75,7 @@ export default function Hero() {
             </p>
 
             {/* Role chips */}
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2 min-w-0">
               {roles.map((role) => (
                 <span
                   key={role}
@@ -87,10 +87,10 @@ export default function Hero() {
             </div>
 
             {/* CTA buttons */}
-            <div className="flex flex-wrap items-center gap-3 pt-1">
+            <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3 pt-1 min-w-0">
               <a
                 href="#resume"
-                className="group inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 active:bg-blue-700 text-white font-semibold px-5 py-2.5 rounded-lg text-[14.5px] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-px active:translate-y-0 active:scale-[0.98] shadow-sm shadow-blue-200/40 hover:shadow-lg hover:shadow-blue-200/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40 focus-visible:ring-offset-2"
+                className="group inline-flex items-center justify-center gap-2 w-full sm:w-auto min-h-11 sm:min-h-0 bg-blue-600 hover:bg-blue-700 active:bg-blue-700 text-white font-semibold px-5 py-2.5 rounded-lg text-[14.5px] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-px active:translate-y-0 active:scale-[0.98] shadow-sm shadow-blue-200/40 hover:shadow-lg hover:shadow-blue-200/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40 focus-visible:ring-offset-2"
               >
                 Lebenslauf ansehen
                 <svg
@@ -110,7 +110,7 @@ export default function Hero() {
               </a>
               <a
                 href="#contact"
-                className="inline-flex items-center gap-2 bg-white hover:bg-slate-50 active:bg-slate-100 text-slate-800 font-semibold px-5 py-2.5 rounded-lg text-[14.5px] border border-slate-200 hover:border-slate-300 transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-px active:translate-y-0 active:scale-[0.98] hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300/60 focus-visible:ring-offset-2"
+                className="inline-flex items-center justify-center gap-2 w-full sm:w-auto min-h-11 sm:min-h-0 bg-white hover:bg-slate-50 active:bg-slate-100 text-slate-800 font-semibold px-5 py-2.5 rounded-lg text-[14.5px] border border-slate-200 hover:border-slate-300 transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-px active:translate-y-0 active:scale-[0.98] hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300/60 focus-visible:ring-offset-2"
               >
                 Kontakt
               </a>
@@ -119,7 +119,7 @@ export default function Hero() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub-Profil ansehen (öffnet in neuem Tab)"
-                className="inline-flex items-center gap-2 bg-white hover:bg-slate-50 active:bg-slate-100 text-slate-800 font-semibold px-5 py-2.5 rounded-lg text-[14.5px] border border-slate-200 hover:border-slate-300 transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-px active:translate-y-0 active:scale-[0.98] hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300/60 focus-visible:ring-offset-2"
+                className="inline-flex items-center justify-center gap-2 w-full sm:w-auto min-h-11 sm:min-h-0 bg-white hover:bg-slate-50 active:bg-slate-100 text-slate-800 font-semibold px-5 py-2.5 rounded-lg text-[14.5px] border border-slate-200 hover:border-slate-300 transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-px active:translate-y-0 active:scale-[0.98] hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300/60 focus-visible:ring-offset-2"
               >
                 <GitHubMarkIcon className="w-4 h-4" />
                 GitHub ansehen

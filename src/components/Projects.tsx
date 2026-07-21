@@ -254,7 +254,7 @@ export default function Projects() {
           <SectionEyebrow label="Projekte" style={revealStyle(inView)} />
 
           {/* Right — project cards */}
-          <div className="transition-all duration-700" style={revealStyle(inView, 100)}>
+          <div className="transition-all duration-700 min-w-0" style={revealStyle(inView, 100)}>
             <h2 className="text-[32px] sm:text-[38px] lg:text-[42px] font-bold text-slate-900 leading-[1.1] tracking-[-0.025em] mb-12 text-balance">
               Ausgewählte{" "}
               <span className="text-slate-500 font-normal">Arbeiten</span>

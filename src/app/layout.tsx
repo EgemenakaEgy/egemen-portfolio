@@ -9,16 +9,15 @@ const jakartaSans = Plus_Jakarta_Sans({
   display: "swap",
 });
 
-// TODO: Sobald die Domain feststeht, NEXT_PUBLIC_SITE_URL setzen (z. B. in .env.production).
-// Aktiviert automatisch metadataBase/canonical, ohne dass hier eine Domain erfunden werden muss.
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+// Domain: egemendemir.de. Per NEXT_PUBLIC_SITE_URL überschreibbar (z. B. für Preview-Deployments).
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://egemendemir.de";
 
 const title = "Egemen Demir — Digital Media Systems";
 const description =
   "Portfolio von Egemen Demir — Werkstudent für IT-Support, Webentwicklung, IT-Administration und Projektmanagement.";
 
 export const metadata: Metadata = {
-  ...(siteUrl ? { metadataBase: new URL(siteUrl) } : {}),
+  metadataBase: new URL(siteUrl),
   title: {
     default: title,
     template: "%s — Egemen Demir",
@@ -36,14 +35,14 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Egemen Demir" }],
   creator: "Egemen Demir",
-  ...(siteUrl ? { alternates: { canonical: siteUrl } } : {}),
+  alternates: { canonical: siteUrl },
   openGraph: {
     type: "website",
     locale: "de_DE",
     title,
     description,
     siteName: "Egemen Demir",
-    ...(siteUrl ? { url: siteUrl } : {}),
+    url: siteUrl,
   },
   twitter: {
     card: "summary",
