@@ -2,6 +2,7 @@
 
 import { useInView } from "@/hooks/useInView";
 import { memo } from "react";
+import Image from "next/image";
 import type { ReactNode, RefObject } from "react";
 import {
   CheckIcon,
@@ -32,28 +33,54 @@ type Project = {
   demoUrl?: string;
   /** Nur setzen, wenn ein Repository grundsätzlich teilbar ist (kein Kunden-/NDA-Projekt). */
   repoOnRequest?: boolean;
+  // TODO: Screenshot ergänzen — Datei unter public/images/projects/ ablegen und Pfad hier eintragen.
+  // Ohne gesetztes `image` wird automatisch der bestehende Platzhalter angezeigt.
+  image?: string;
 };
 
 const projects: Project[] = [
   {
-    title: "Kollaborativer SQL-Playground",
+    title: "YASEMED – Unternehmenswebsite",
+    subtitle: "Demir IT · Kundenprojekt",
+    role: "Konzeption & Umsetzung",
+    problem:
+      "Die Naturheilpraxis YaseMed benötigte einen professionellen Webauftritt, um Leistungen, Praxisschwerpunkte und Kontaktmöglichkeiten für Patientinnen und Patienten übersichtlich darzustellen.",
+    task: "Verantwortlich für Konzeption, Seitenstruktur, Gestaltung, technische Umsetzung sowie die Optimierung der Inhalte und Texte für einen professionellen Webauftritt.",
+    solution:
+      "Vollständig eigenständig entwickelte Unternehmenswebsite für eine Naturheilpraxis — von der Konzeption bis zur technischen Umsetzung.",
+    result:
+      "Eine vollständige, live geschaltete Unternehmenswebsite für die Naturheilpraxis YaseMed mit Leistungsübersicht, Praxisvorstellung und Kontaktmöglichkeiten.",
+    highlights: [
+      "Konzeption der Seitenstruktur und Navigation",
+      "Inhaltliche Ausarbeitung von Leistungen und Praxisvorstellung",
+      "Individuelles visuelles Design",
+      "Technische Umsetzung und Konfiguration",
+      "Optimierung von Inhalten und Texten für einen professionellen Webauftritt",
+    ],
+    tech: ["Wix", "Responsive Design", "SEO", "Content-Optimierung"],
+    demoUrl: "https://yasemed.de",
+    image: "/images/projects/yasemed.de.png",
+  },
+  {
+    title: "SQL Playground",
     subtitle: "Hochschulprojekt · Wirtschaftsinformatik-Praktikum",
     role: "Teammitglied",
     problem:
-      "Für das Praktikum sollte eine Webanwendung entstehen, mit der mehrere Studierende gleichzeitig an SQL- und Modellierungsaufgaben arbeiten können.",
+      "Für das Hochschulprojekt sollte eine kollaborative Webanwendung für SQL-Übungen mit gemeinsamem Editor, Kommentaren, Review-System und Versionsverwaltung entstehen.",
     task: "Schwerpunkt auf kollaborativen Funktionen, Tests und Dokumentation im Team.",
     solution:
       "Beitrag zu Echtzeit-Zusammenarbeit sowie zu Kommentar-, Review- und Versionsverlauf-Funktionen, dazu technische Dokumentation und Fehleranalyse im Team.",
     result:
-      "Eine im Praktikum eingesetzte Webanwendung, die mehreren Nutzern gemeinsames Arbeiten an SQL- und Modellierungsaufgaben in Echtzeit ermöglicht.",
+      "Eine im Hochschulprojekt eingesetzte, kollaborative Webanwendung für SQL-Übungen mit gemeinsamem Editor, Kommentaren, Review-System und Versionsverwaltung.",
     highlights: [
       "Integration und Tests von Echtzeit-Zusammenarbeit",
       "Mitarbeit an Kommentaren, Review-Funktionen und Versionsverlauf",
       "Technische Dokumentation",
       "Fehleranalyse und Tests im Team",
     ],
-    tech: ["Node.js", "TypeScript", "PostgreSQL", "Redis", "Docker", "Git", "WebSockets", "Yjs"],
+    tech: ["TypeScript", "Node.js", "Express", "PostgreSQL", "Redis", "Docker"],
     repoOnRequest: true,
+    image: "/images/projects/projekt.png",
   },
   {
     title: "Projekt-Homepage im UKGM-Umfeld",
@@ -136,28 +163,40 @@ const ProjectCard = memo(function ProjectCard({ project }: { project: Project })
 
   return (
     <article className="group bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm shadow-slate-200/40 hover:shadow-xl hover:shadow-blue-100/50 hover:border-blue-200 hover:ring-1 hover:ring-blue-100/60 hover:-translate-y-1 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]">
-      {/* Bild-Platzhalter */}
-      <div className="relative h-44 sm:h-52 md:h-56 bg-gradient-to-br from-slate-50 via-blue-50/50 to-blue-100/60 border-b border-slate-100 flex items-center justify-center overflow-hidden">
-        <div
-          className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-blue-200/25 blur-2xl opacity-70 transition-opacity duration-300 group-hover:opacity-100"
-          aria-hidden="true"
-        />
-        <div
-          className="absolute inset-0 opacity-25"
-          style={{
-            backgroundImage: "radial-gradient(circle, #93c5fd 1px, transparent 1px)",
-            backgroundSize: "18px 18px",
-          }}
-          aria-hidden="true"
-        />
-        <div className="relative z-10 flex flex-col items-center gap-2 text-slate-400">
-          <span className="w-11 h-11 rounded-xl bg-white/80 border border-blue-100 shadow-sm flex items-center justify-center text-blue-400">
-            <ImagePlaceholderIcon className="w-5 h-5" />
-          </span>
-          <span className="text-[10.5px] font-semibold tracking-[0.14em] uppercase">
-            Screenshot folgt
-          </span>
-        </div>
+      {/* Bild-Platzhalter / Screenshot */}
+      <div className="relative aspect-[8/5] bg-gradient-to-br from-slate-50 via-blue-50/50 to-blue-100/60 border-b border-slate-100 flex items-center justify-center overflow-hidden">
+        {project.image ? (
+          <Image
+            src={project.image}
+            alt={`Screenshot der Website „${project.title}“`}
+            fill
+            sizes="(min-width: 1024px) 700px, 100vw"
+            className="object-contain transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.02]"
+          />
+        ) : (
+          <>
+            <div
+              className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-blue-200/25 blur-2xl opacity-70 transition-opacity duration-300 group-hover:opacity-100"
+              aria-hidden="true"
+            />
+            <div
+              className="absolute inset-0 opacity-25"
+              style={{
+                backgroundImage: "radial-gradient(circle, #93c5fd 1px, transparent 1px)",
+                backgroundSize: "18px 18px",
+              }}
+              aria-hidden="true"
+            />
+            <div className="relative z-10 flex flex-col items-center gap-2 text-slate-400">
+              <span className="w-11 h-11 rounded-xl bg-white/80 border border-blue-100 shadow-sm flex items-center justify-center text-blue-400">
+                <ImagePlaceholderIcon className="w-5 h-5" />
+              </span>
+              <span className="text-[10.5px] font-semibold tracking-[0.14em] uppercase">
+                Screenshot folgt
+              </span>
+            </div>
+          </>
+        )}
       </div>
 
       <div className="p-6 sm:p-8">
@@ -240,7 +279,7 @@ const ProjectCard = memo(function ProjectCard({ project }: { project: Project })
               <ProjectLinkButton
                 href={project.demoUrl}
                 icon={<ExternalLinkIcon className="w-3.5 h-3.5" />}
-                label="Live-Demo"
+                label="Live Demo"
                 ariaLabel={`Live-Demo von „${project.title}“ öffnen (neuer Tab)`}
               />
             )}
