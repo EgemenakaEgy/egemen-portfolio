@@ -108,8 +108,8 @@ const ExperienceCard = memo(function ExperienceCard({
           <h3
             className={
               entry.primary
-                ? "text-[17px] font-semibold text-slate-900 tracking-tight leading-snug"
-                : "text-[15px] font-medium text-slate-600 tracking-tight leading-snug"
+                ? "text-[13.5px] font-medium text-slate-500 tracking-tight leading-snug"
+                : "text-[12.5px] font-medium text-slate-400 tracking-tight leading-snug"
             }
           >
             {entry.title}
@@ -122,13 +122,13 @@ const ExperienceCard = memo(function ExperienceCard({
         <p
           className={
             entry.primary
-              ? "text-[13.5px] font-medium text-blue-600 mb-3"
-              : "text-[13px] text-slate-500 mb-2.5"
+              ? "text-[16px] font-bold text-slate-900 mb-3"
+              : "text-[14px] font-semibold text-slate-600 mb-2.5"
           }
         >
           {entry.company}
           {entry.context && (
-            <span className={entry.primary ? "text-slate-500 font-normal" : undefined}>
+            <span className={entry.primary ? "text-slate-500 font-normal" : "text-slate-400 font-normal"}>
               {" "}
               · {entry.context}
             </span>

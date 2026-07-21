@@ -21,7 +21,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center overflow-hidden bg-white">
+    <section id="home" className="relative min-h-[90vh] flex items-center overflow-hidden bg-white">
       {/* Subtle gradient wash */}
       <div className="absolute inset-0 bg-gradient-to-br from-white via-white to-blue-50/50 pointer-events-none" />
 
@@ -41,11 +41,11 @@ export default function Hero() {
       <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-white via-transparent to-white opacity-50" />
 
       <div className="relative max-w-6xl mx-auto px-6 sm:px-8 lg:px-8 w-full pt-20">
-        <div className="grid lg:grid-cols-[1fr_340px] gap-12 lg:gap-16 xl:gap-20 items-center py-16 sm:py-20 md:py-24 lg:py-28">
+        <div className="grid lg:grid-cols-[1fr_340px] gap-12 lg:gap-16 xl:gap-20 items-center py-12 sm:py-16 md:py-20 lg:py-24">
 
           {/* Left column */}
           <div
-            className={`flex flex-col gap-7 transition-none ${
+            className={`flex flex-col gap-6 transition-none ${
               mounted ? "animate-slide-up" : "opacity-0"
             }`}
           >
