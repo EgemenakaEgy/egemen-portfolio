@@ -192,20 +192,6 @@ export default function Hero() {
         </div>
 
       </div>
-
-      {/* Scroll hint — absolute within section so bottom-10 is vs. viewport bottom */}
-      <div
-        className={`absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none ${
-          mounted ? "animate-fade-in" : "opacity-0"
-        }`}
-        style={{ animationDelay: "800ms" }}
-        aria-hidden="true"
-      >
-        <span className="text-[11px] font-medium text-slate-500 tracking-widest uppercase">
-          Scroll
-        </span>
-        <div className="w-px h-8 bg-gradient-to-b from-slate-300 to-transparent" />
-      </div>
     </section>
   );
 }
