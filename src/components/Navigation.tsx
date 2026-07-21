@@ -16,27 +16,40 @@ export default function Navigation() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    // rAF-Throttling: Scroll-Events feuern sehr häufig, aber wir müssen
+    // den Zustand höchstens einmal pro Frame aktualisieren.
+    let ticking = false;
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(() => {
+        setScrolled(window.scrollY > 24);
+        ticking = false;
+      });
+    };
+
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
         scrolled
-          ? "bg-white/90 backdrop-blur-md border-b border-slate-100/80 shadow-sm shadow-slate-100/60"
+          ? "bg-white/85 backdrop-blur-md border-b border-slate-100/80 shadow-sm shadow-slate-200/40"
           : "bg-transparent"
       }`}
     >
       <nav
+        aria-label="Hauptnavigation"
         className="max-w-6xl mx-auto px-6 lg:px-8 flex items-center justify-between"
         style={{ height: "68px" }}
       >
         {/* Wordmark */}
         <a
           href="#home"
-          className="text-[16px] font-semibold text-slate-900 tracking-[-0.02em] hover:text-blue-600 transition-colors duration-200"
+          className="text-[16px] font-semibold text-slate-900 tracking-[-0.02em] hover:text-blue-600 transition-colors duration-200 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40 focus-visible:ring-offset-2"
         >
           Egemen Demir
         </a>
@@ -47,7 +60,7 @@ export default function Navigation() {
             <a
               key={link.href}
               href={link.href}
-              className="text-[13.5px] font-medium text-slate-500 hover:text-slate-900 transition-colors duration-200 tracking-wide"
+              className="relative text-[13.5px] font-medium text-slate-500 hover:text-slate-900 transition-colors duration-200 tracking-wide py-1 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40 focus-visible:ring-offset-2 after:content-[''] after:absolute after:left-0 after:-bottom-0.5 after:h-px after:w-0 after:bg-slate-900 after:transition-all after:duration-300 after:ease-[cubic-bezier(0.16,1,0.3,1)] hover:after:w-full"
             >
               {link.label}
             </a>
@@ -56,11 +69,14 @@ export default function Navigation() {
 
         {/* Mobile toggle */}
         <button
-          className="md:hidden p-2 -mr-2 text-slate-600 hover:text-slate-900 transition-colors"
+          type="button"
+          className="md:hidden p-2 -mr-2 text-slate-600 hover:text-slate-900 transition-colors rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40"
           onClick={() => setMenuOpen((o) => !o)}
-          aria-label="Menü öffnen"
+          aria-label={menuOpen ? "Menü schließen" : "Menü öffnen"}
+          aria-expanded={menuOpen}
+          aria-controls="mobile-menu"
         >
-          <div className="w-[22px] flex flex-col gap-[5px]">
+          <div className="w-[22px] flex flex-col gap-[5px]" aria-hidden="true">
             <span
               className={`block h-px bg-current origin-center transition-all duration-250 ${
                 menuOpen ? "rotate-45 translate-y-[6px]" : ""
@@ -82,7 +98,8 @@ export default function Navigation() {
 
       {/* Mobile dropdown */}
       <div
-        className={`md:hidden overflow-hidden transition-all duration-300 ${
+        id="mobile-menu"
+        className={`md:hidden overflow-hidden transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
           menuOpen ? "max-h-64 opacity-100" : "max-h-0 opacity-0"
         } bg-white border-t border-slate-100`}
       >
@@ -92,7 +109,7 @@ export default function Navigation() {
               key={link.href}
               href={link.href}
               onClick={() => setMenuOpen(false)}
-              className="text-[15px] font-medium text-slate-700 hover:text-blue-600 transition-colors py-2"
+              className="text-[15px] font-medium text-slate-700 hover:text-blue-600 transition-colors py-2 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40"
             >
               {link.label}
             </a>

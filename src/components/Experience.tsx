@@ -1,7 +1,11 @@
 "use client";
 
 import { useInView } from "@/hooks/useInView";
+import { memo } from "react";
 import type { RefObject } from "react";
+import { ExperienceIcon } from "@/components/icons";
+import { SectionEyebrow } from "@/components/SectionEyebrow";
+import { revealStyle } from "@/lib/motion";
 
 type ExperienceEntry = {
   title: string;
@@ -10,6 +14,7 @@ type ExperienceEntry = {
   period: string;
   tasks: string[];
   primary: boolean;
+  icon: "web" | "teaching" | "business" | "event";
 };
 
 const experiences: ExperienceEntry[] = [
@@ -24,6 +29,7 @@ const experiences: ExperienceEntry[] = [
       "Abstimmung mit dem Projektteam",
     ],
     primary: true,
+    icon: "web",
   },
   {
     title: "Tutor für Betriebswirtschaftslehre",
@@ -39,6 +45,7 @@ const experiences: ExperienceEntry[] = [
       "Bei Bedarf selbstständige Leitung von Lehrveranstaltungen",
     ],
     primary: true,
+    icon: "teaching",
   },
   {
     title: "Inhaber – IT-Dienstleistungen und Webentwicklung",
@@ -52,6 +59,7 @@ const experiences: ExperienceEntry[] = [
       "Technischer Support und Fehlerbehebung",
     ],
     primary: true,
+    icon: "business",
   },
   {
     title: "Eventmanagement-Leiter",
@@ -65,10 +73,11 @@ const experiences: ExperienceEntry[] = [
       "Budget- und Ablaufplanung",
     ],
     primary: false,
+    icon: "event",
   },
 ];
 
-function ExperienceCard({
+const ExperienceCard = memo(function ExperienceCard({
   entry,
   delay,
   inView,
@@ -77,78 +86,70 @@ function ExperienceCard({
   delay: number;
   inView: boolean;
 }) {
-  if (entry.primary) {
-    return (
-      <div
-        className="transition-all duration-700 group"
-        style={{
-          opacity: inView ? 1 : 0,
-          transform: inView ? "translateY(0)" : "translateY(16px)",
-          transitionDelay: `${delay}ms`,
-        }}
-      >
-        <div className="relative pl-6 border-l-2 border-slate-200 group-hover:border-blue-300 transition-colors duration-300">
-          <div className="absolute -left-[5px] top-1.5 w-2 h-2 rounded-full bg-slate-300 group-hover:bg-blue-400 transition-colors duration-300" />
-
-          <div className="flex flex-wrap items-baseline justify-between gap-2 mb-2">
-            <h3 className="text-[17px] font-semibold text-slate-900 tracking-tight leading-snug">
-              {entry.title}
-            </h3>
-            <span className="text-[12.5px] font-medium text-slate-400 shrink-0">
-              {entry.period}
-            </span>
-          </div>
-
-          <p className="text-[13.5px] font-medium text-blue-600 mb-3">
-            {entry.company}
-            {entry.context && (
-              <span className="text-slate-400 font-normal"> · {entry.context}</span>
-            )}
-          </p>
-
-          <ul className="space-y-1.5">
-            {entry.tasks.map((task) => (
-              <li key={task} className="flex gap-2 text-[14.5px] text-slate-600 leading-[1.65]">
-                <span className="mt-[7px] shrink-0 w-1 h-1 rounded-full bg-slate-300" />
-                {task}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div
-      className="transition-all duration-700"
-      style={{
-        opacity: inView ? 1 : 0,
-        transform: inView ? "translateY(0)" : "translateY(16px)",
-        transitionDelay: `${delay}ms`,
-      }}
+      className="relative flex gap-4 sm:gap-5 group transition-all duration-700"
+      style={revealStyle(inView, delay)}
     >
-      <div className="relative pl-6 border-l-2 border-slate-100">
-        <div className="absolute -left-[5px] top-1.5 w-2 h-2 rounded-full bg-slate-200" />
+      {/* Marker */}
+      <div
+        className={`relative z-10 shrink-0 w-10 h-10 rounded-full border-2 bg-white flex items-center justify-center shadow-sm transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-0.5 ${
+          entry.primary
+            ? "border-slate-200 text-slate-500 group-hover:border-blue-300 group-hover:text-blue-600 group-hover:shadow-md group-hover:shadow-blue-100/60"
+            : "border-slate-100 text-slate-400 group-hover:border-slate-300 group-hover:text-slate-500"
+        }`}
+      >
+        <ExperienceIcon type={entry.icon} className="w-4.5 h-4.5" />
+      </div>
 
-        <div className="flex flex-wrap items-baseline justify-between gap-2 mb-1">
-          <h3 className="text-[15px] font-medium text-slate-600 tracking-tight leading-snug">
+      {/* Content */}
+      <div className="flex-1 min-w-0 pt-1.5 pb-1">
+        <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1 mb-1.5">
+          <h3
+            className={
+              entry.primary
+                ? "text-[17px] font-semibold text-slate-900 tracking-tight leading-snug"
+                : "text-[15px] font-medium text-slate-600 tracking-tight leading-snug"
+            }
+          >
             {entry.title}
           </h3>
-          <span className="text-[12px] font-medium text-slate-400 shrink-0">
+          <span className="text-[12.5px] font-medium text-slate-500 shrink-0">
             {entry.period}
           </span>
         </div>
 
-        <p className="text-[13px] text-slate-400 mb-2.5">
+        <p
+          className={
+            entry.primary
+              ? "text-[13.5px] font-medium text-blue-600 mb-3"
+              : "text-[13px] text-slate-500 mb-2.5"
+          }
+        >
           {entry.company}
-          {entry.context && <span> · {entry.context}</span>}
+          {entry.context && (
+            <span className={entry.primary ? "text-slate-500 font-normal" : undefined}>
+              {" "}
+              · {entry.context}
+            </span>
+          )}
         </p>
 
-        <ul className="space-y-1">
+        <ul className={entry.primary ? "space-y-1.5" : "space-y-1"}>
           {entry.tasks.map((task) => (
-            <li key={task} className="flex gap-2 text-[13.5px] text-slate-500 leading-[1.6]">
-              <span className="mt-[7px] shrink-0 w-1 h-1 rounded-full bg-slate-200" />
+            <li
+              key={task}
+              className={
+                entry.primary
+                  ? "flex gap-2 text-[14.5px] text-slate-600 leading-[1.65] text-pretty"
+                  : "flex gap-2 text-[13.5px] text-slate-500 leading-[1.6] text-pretty"
+              }
+            >
+              <span
+                className={`mt-[7px] shrink-0 w-1 h-1 rounded-full ${
+                  entry.primary ? "bg-slate-300" : "bg-slate-200"
+                }`}
+              />
               {task}
             </li>
           ))}
@@ -156,7 +157,7 @@ function ExperienceCard({
       </div>
     </div>
   );
-}
+});
 
 export default function Experience() {
   const { ref, inView } = useInView();
@@ -165,48 +166,38 @@ export default function Experience() {
     <section
       id="experience"
       ref={ref as RefObject<HTMLElement>}
-      className="py-24 lg:py-36 bg-white border-t border-slate-100 scroll-mt-[88px]"
+      className="py-20 sm:py-24 md:py-28 lg:py-36 bg-white border-t border-slate-100 scroll-mt-[88px]"
     >
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-[200px_1fr] gap-10 lg:gap-24 items-start">
 
           {/* Left — section label */}
-          <div
-            className="transition-all duration-700"
-            style={{
-              opacity: inView ? 1 : 0,
-              transform: inView ? "translateY(0)" : "translateY(16px)",
-            }}
-          >
-            <span className="text-[11px] font-bold text-blue-600 tracking-[0.18em] uppercase">
-              Erfahrung
-            </span>
-            <div className="mt-3 w-6 h-[2px] bg-blue-600 rounded-full" />
-          </div>
+          <SectionEyebrow label="Erfahrung" style={revealStyle(inView)} />
 
           {/* Right — timeline */}
-          <div
-            className="transition-all duration-700"
-            style={{
-              opacity: inView ? 1 : 0,
-              transform: inView ? "translateY(0)" : "translateY(16px)",
-              transitionDelay: "100ms",
-            }}
-          >
-            <h2 className="text-[32px] sm:text-[38px] lg:text-[42px] font-bold text-slate-900 leading-[1.1] tracking-[-0.025em] mb-12">
+          <div className="transition-all duration-700" style={revealStyle(inView, 100)}>
+            <h2 className="text-[32px] sm:text-[38px] lg:text-[42px] font-bold text-slate-900 leading-[1.1] tracking-[-0.025em] mb-12 text-balance">
               Berufliche{" "}
-              <span className="text-slate-400 font-normal">Stationen</span>
+              <span className="text-slate-500 font-normal">Stationen</span>
             </h2>
 
-            <div className="space-y-10">
-              {experiences.map((entry, i) => (
-                <ExperienceCard
-                  key={entry.title}
-                  entry={entry}
-                  delay={150 + i * 100}
-                  inView={inView}
-                />
-              ))}
+            <div className="relative">
+              {/* Durchgehende Timeline-Linie hinter den Markern */}
+              <div
+                className="absolute left-5 top-5 bottom-5 w-px bg-gradient-to-b from-slate-200 via-slate-200 to-slate-100"
+                aria-hidden="true"
+              />
+
+              <div className="space-y-11">
+                {experiences.map((entry, i) => (
+                  <ExperienceCard
+                    key={entry.title}
+                    entry={entry}
+                    delay={150 + i * 100}
+                    inView={inView}
+                  />
+                ))}
+              </div>
             </div>
           </div>
 

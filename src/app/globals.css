@@ -21,6 +21,13 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "cv11", "ss01", "kern";
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background-color: #bfdbfe;
+  color: #1e3a8a;
 }
 
 @keyframes fadeIn {
@@ -39,6 +46,11 @@ body {
   }
 }
 
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
 .animate-fade-in {
   animation: fadeIn 0.7s ease-out forwards;
 }
@@ -47,11 +59,25 @@ body {
   animation: slideUp 0.8s ease-out forwards;
 }
 
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
   .animate-fade-in,
-  .animate-slide-up {
+  .animate-slide-up,
+  .animate-float {
     animation: none;
     opacity: 1;
     transform: none;
