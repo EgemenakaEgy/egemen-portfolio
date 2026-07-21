@@ -7,8 +7,8 @@ const GITHUB_URL = "https://github.com/EgemenakaEgy";
 
 const roles = [
   "IT-Support",
-  "Webentwicklung",
   "IT-Administration",
+  "Webentwicklung",
   "Projektmanagement",
 ];
 
@@ -53,7 +53,7 @@ export default function Hero() {
             <div>
               <span className="inline-flex items-center gap-2 text-[12.5px] font-semibold text-blue-600 bg-blue-50 px-3 py-1.5 rounded-full border border-blue-100 tracking-wide uppercase">
                 <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
-                Digital Media Systems · THM Mittelhessen
+                Digital Media Systems (Bachelor) · THM Mittelhessen
               </span>
             </div>
 
@@ -70,8 +70,8 @@ export default function Hero() {
 
             {/* Subtitle */}
             <p className="text-[17px] sm:text-[18px] text-slate-500 font-light leading-relaxed text-pretty max-w-[440px]">
-              Werkstudent für IT und Web — ich bringe technisches Denken in
-              die&nbsp;Praxis.
+              Praxiserfahrung in Webentwicklung und technischem Support —
+              Werkstudentenstelle gesucht&nbsp;in:
             </p>
 
             {/* Role chips */}
@@ -185,7 +185,7 @@ export default function Hero() {
                 <p className="text-[10px] font-semibold uppercase tracking-wide opacity-80">
                   Standort
                 </p>
-                <p className="text-[12px] font-bold">Gießen, DE</p>
+                <p className="text-[12px] font-bold">Gießen · Frankfurt</p>
               </div>
             </div>
           </div>

@@ -31,17 +31,18 @@ export default function About() {
 
             <div className="space-y-5 max-w-2xl">
               <p className="text-[16.5px] text-slate-600 leading-[1.8] text-pretty">
-                Ich studiere Digital Media Systems an der THM Mittelhessen —
-                ein Studiengang, der technisches Engineering mit
-                Medienwissenschaften verbindet. Parallel arbeite ich als
-                Werkstudent und sammle Praxiserfahrung in IT-Support,
-                Webentwicklung, IT-Administration und Projektmanagement.
+                Ich studiere Digital Media Systems (Bachelor) an der THM
+                Mittelhessen mit Vertiefung Management und technischem Fokus.
+                Parallel sammle ich praktische Erfahrung in Webentwicklung,
+                IT-Projekten, technischem Support, Tutorentätigkeit und im
+                Kundenkontakt.
               </p>
               <p className="text-[16.5px] text-slate-600 leading-[1.8] text-pretty">
-                Ich arbeite strukturiert, lerne schnell und bin in Umgebungen
-                produktiv, wo Technik und Kommunikation zusammenkommen. Aktuell
-                suche ich Positionen, in denen ich Verantwortung übernehmen und
-                meinen Beitrag sichtbar machen kann.
+                Ich arbeite strukturiert und bin dort produktiv, wo Technik und
+                Kommunikation zusammenkommen. Aktuell suche ich eine
+                Werkstudentenstelle in IT-Support, IT-Administration,
+                Webentwicklung oder Projektmanagement — verfügbar in Gießen
+                und Frankfurt am Main.
               </p>
             </div>
           </div>
