@@ -260,3 +260,19 @@ export function ArrowUpRightIcon({ className = "w-3.5 h-3.5" }: IconProps) {
     </Svg>
   );
 }
+
+export function CheckIcon({ className = "w-4 h-4" }: IconProps) {
+  return (
+    <Svg className={className}>
+      <path d="M20 6L9 17l-5-5" />
+    </Svg>
+  );
+}
+
+export function ChevronDownIcon({ className = "w-3.5 h-3.5" }: IconProps) {
+  return (
+    <Svg className={className}>
+      <path d="M6 9l6 6 6-6" />
+    </Svg>
+  );
+}
