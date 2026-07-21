@@ -1,11 +1,10 @@
 "use client";
 
 import { useInView } from "@/hooks/useInView";
-import { memo, useEffect, useRef, useState } from "react";
+import { memo } from "react";
 import type { ReactNode, RefObject } from "react";
 import {
   CheckIcon,
-  ChevronDownIcon,
   ExternalLinkIcon,
   GitHubMarkIcon,
   ImagePlaceholderIcon,
@@ -17,94 +16,91 @@ import { revealStyle } from "@/lib/motion";
 type Project = {
   title: string;
   subtitle: string;
-  role: string | null;
-  description: string;
-  contributions: string[];
+  /** Kurzer Rollentitel, prominent als Badge dargestellt. */
+  role: string;
+  /** Problem / Aufgabe / Lösung / Ergebnis — jeweils 1 kurzer Satz. */
+  problem: string;
+  task: string;
+  solution: string;
+  result: string;
+  /** Konkrete Beiträge/Ergebnisse als Stichpunkte. */
+  highlights: string[];
   tech: string[];
   // TODO: Sobald verfügbar, echte Links ergänzen (keine Platzhalter-URLs).
   // Buttons erscheinen automatisch, sobald hier eine URL eingetragen ist.
   githubUrl?: string;
   demoUrl?: string;
+  /** Nur setzen, wenn ein Repository grundsätzlich teilbar ist (kein Kunden-/NDA-Projekt). */
+  repoOnRequest?: boolean;
 };
 
 const projects: Project[] = [
   {
     title: "Kollaborativer SQL-Playground",
     subtitle: "Hochschulprojekt · Wirtschaftsinformatik-Praktikum",
-    role: "Teammitglied mit Schwerpunkt auf kollaborativen Funktionen, Tests und Dokumentation",
-    description:
-      "Webanwendung für SQL- und Modellierungsaufgaben, die mehreren Nutzern ermöglicht, gemeinsam in Echtzeit zu arbeiten.",
-    contributions: [
+    role: "Teammitglied",
+    problem:
+      "Für das Praktikum sollte eine Webanwendung entstehen, mit der mehrere Studierende gleichzeitig an SQL- und Modellierungsaufgaben arbeiten können.",
+    task: "Schwerpunkt auf kollaborativen Funktionen, Tests und Dokumentation im Team.",
+    solution:
+      "Beitrag zu Echtzeit-Zusammenarbeit sowie zu Kommentar-, Review- und Versionsverlauf-Funktionen, dazu technische Dokumentation und Fehleranalyse im Team.",
+    result:
+      "Eine im Praktikum eingesetzte Webanwendung, die mehreren Nutzern gemeinsames Arbeiten an SQL- und Modellierungsaufgaben in Echtzeit ermöglicht.",
+    highlights: [
       "Integration und Tests von Echtzeit-Zusammenarbeit",
       "Mitarbeit an Kommentaren, Review-Funktionen und Versionsverlauf",
       "Technische Dokumentation",
       "Fehleranalyse und Tests im Team",
     ],
     tech: ["Node.js", "TypeScript", "PostgreSQL", "Redis", "Docker", "Git", "WebSockets", "Yjs"],
+    repoOnRequest: true,
   },
   {
     title: "Projekt-Homepage im UKGM-Umfeld",
     subtitle: "TransMIT GmbH",
-    role: null,
-    description:
-      "Weiterentwicklung und Pflege einer bestehenden Projekt-Homepage in Abstimmung mit dem Projektteam. Überarbeitung von Inhalten und einzelnen Unterseiten.",
-    contributions: [],
+    role: "Studentische Hilfskraft Webentwicklung",
+    problem:
+      "Eine bestehende Projekt-Homepage im UKGM-Umfeld sollte auf Basis eines bestehenden Templates inhaltlich und gestalterisch weiterentwickelt werden.",
+    task: "Weiterentwicklung und Pflege einer bestehenden Projekt-Homepage in Abstimmung mit dem Projektteam.",
+    solution:
+      "Inhaltliche Pflege und gestalterische Überarbeitung einzelner Unterseiten auf Basis des bestehenden Templates.",
+    result:
+      "Eine inhaltlich aktualisierte, gestalterisch überarbeitete Projekt-Homepage im UKGM-Umfeld.",
+    highlights: [
+      "Weiterentwicklung und inhaltliche Pflege einer Projekt-Homepage auf Basis eines bestehenden Templates",
+      "Gestalterische Überarbeitung einzelner Unterseiten",
+      "Abstimmung mit dem Projektteam",
+    ],
     tech: [],
   },
   {
     title: "Kundenwebsites für Demir IT",
     subtitle: "Selbstständig · 2016–2023",
-    role: null,
-    description:
-      "Konzeption und Umsetzung mehrerer Websites für kleinere Unternehmen. Verantwortlich für Gestaltung, Inhalte, technische Einrichtung, Kundenabstimmung und Betreuung.",
-    contributions: [],
+    role: "Inhaber – IT-Dienstleistungen und Webentwicklung",
+    problem:
+      "Kleinere Unternehmen benötigten individuelle Websites inklusive Gestaltung, technischer Einrichtung und laufender Betreuung.",
+    task:
+      "Konzeption und Umsetzung mehrerer Websites für kleinere Unternehmen — verantwortlich für Gestaltung, Inhalte, technische Einrichtung, Kundenabstimmung und Betreuung.",
+    solution:
+      "Konzeption, Gestaltung und technische Umsetzung individueller Websites inklusive Kundenberatung, Domain-Unterstützung und technischem Support.",
+    result: "Rund 6–7 realisierte Kundenwebsites über einen Zeitraum von 2016 bis 2023.",
+    highlights: [
+      "Konzeption, Gestaltung und Umsetzung von ca. 6–7 Kundenwebsites (überwiegend mit Wix)",
+      "Kundenberatung und inhaltliche Einrichtung",
+      "Unterstützung bei Domain-Themen",
+      "Technischer Support und Fehlerbehebung",
+    ],
     tech: ["Wix"],
   },
 ];
 
-/**
- * Beschreibungstext, der auf 3 Zeilen begrenzt wird. Der "Mehr anzeigen"-
- * Toggle erscheint nur, wenn der Text tatsächlich überläuft.
- */
-function ClampedDescription({ text }: { text: string }) {
-  const ref = useRef<HTMLParagraphElement>(null);
-  const [isOverflowing, setIsOverflowing] = useState(false);
-  const [expanded, setExpanded] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el || expanded) return;
-
-    const check = () => setIsOverflowing(el.scrollHeight > el.clientHeight + 1);
-    check();
-
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
-  }, [text, expanded]);
-
+function CaseStudyField({ label, text }: { label: string; text: string }) {
   return (
-    <div className="mb-5">
-      <p
-        ref={ref}
-        className={`text-[15px] text-slate-600 leading-[1.75] text-pretty ${
-          expanded ? "" : "line-clamp-3"
-        }`}
-      >
-        {text}
+    <div>
+      <p className="text-[11px] font-semibold text-slate-500 tracking-[0.12em] uppercase mb-1">
+        {label}
       </p>
-      {isOverflowing && (
-        <button
-          type="button"
-          onClick={() => setExpanded((v) => !v)}
-          aria-expanded={expanded}
-          className="mt-2 inline-flex items-center gap-1 text-[13px] font-semibold text-blue-600 hover:text-blue-700 transition-colors duration-200 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40"
-        >
-          {expanded ? "Weniger anzeigen" : "Mehr anzeigen"}
-          <ChevronDownIcon
-            className={`w-3.5 h-3.5 transition-transform duration-200 ${expanded ? "rotate-180" : ""}`}
-          />
-        </button>
-      )}
+      <p className="text-[14px] text-slate-600 leading-[1.7] text-pretty">{text}</p>
     </div>
   );
 }
@@ -136,6 +132,7 @@ const ProjectLinkButton = memo(function ProjectLinkButton({
 
 const ProjectCard = memo(function ProjectCard({ project }: { project: Project }) {
   const hasLinks = Boolean(project.githubUrl || project.demoUrl);
+  const showRepoHint = !hasLinks && project.repoOnRequest;
 
   return (
     <article className="group bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm shadow-slate-200/40 hover:shadow-xl hover:shadow-blue-100/50 hover:border-blue-200 hover:ring-1 hover:ring-blue-100/60 hover:-translate-y-1 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]">
@@ -173,39 +170,62 @@ const ProjectCard = memo(function ProjectCard({ project }: { project: Project })
           </h3>
         </div>
 
-        {project.role && (
-          <p className="text-[13px] font-medium text-slate-500 bg-slate-50 border border-slate-100 rounded-md px-3 py-1.5 inline-block mb-4 text-pretty">
+        {/* Rolle — klar hervorgehoben */}
+        <div className="mb-5">
+          <p className="text-[11px] font-semibold text-slate-500 tracking-[0.12em] uppercase mb-1.5">
+            Rolle
+          </p>
+          <p className="text-[13px] font-medium text-blue-700 bg-blue-50 border border-blue-100 rounded-md px-3 py-1.5 inline-block">
             {project.role}
           </p>
-        )}
+        </div>
 
-        <ClampedDescription text={project.description} />
+        {/* Problem / Aufgabe / Lösung / Ergebnis */}
+        <div className="space-y-4 mb-6">
+          <CaseStudyField label="Problem" text={project.problem} />
+          <CaseStudyField label="Meine Aufgabe" text={project.task} />
+          <CaseStudyField label="Lösung" text={project.solution} />
+          <CaseStudyField label="Ergebnis" text={project.result} />
+        </div>
 
-        {project.contributions.length > 0 && (
-          <ul className="space-y-2 mb-6">
-            {project.contributions.map((item) => (
-              <li key={item} className="flex gap-2.5 text-[14px] text-slate-600 leading-[1.6]">
-                <CheckIcon className="w-4 h-4 mt-[1px] shrink-0 text-blue-500" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        )}
-
-        {project.tech.length > 0 && (
-          <div className="flex flex-wrap gap-2 mb-6 pt-5 border-t border-slate-100">
-            {project.tech.map((t) => (
-              <span
-                key={t}
-                className="inline-flex items-center h-7 gap-1.5 text-[12px] font-medium text-slate-600 bg-slate-50 border border-slate-200 pl-2 pr-2.5 rounded-md"
-              >
-                <TechIcon name={t} className="w-3 h-3 text-slate-400" />
-                {t}
-              </span>
-            ))}
+        {/* Highlights */}
+        {project.highlights.length > 0 && (
+          <div className="mb-6">
+            <p className="text-[11px] font-semibold text-slate-500 tracking-[0.12em] uppercase mb-2.5">
+              Highlights
+            </p>
+            <ul className="space-y-2">
+              {project.highlights.map((item) => (
+                <li key={item} className="flex gap-2.5 text-[14px] text-slate-600 leading-[1.6]">
+                  <CheckIcon className="w-4 h-4 mt-[1px] shrink-0 text-blue-500" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         )}
 
+        {/* Technologien */}
+        {project.tech.length > 0 && (
+          <div className="mb-6 pt-5 border-t border-slate-100">
+            <p className="text-[11px] font-semibold text-slate-500 tracking-[0.12em] uppercase mb-2.5">
+              Technologien
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {project.tech.map((t) => (
+                <span
+                  key={t}
+                  className="inline-flex items-center h-7 gap-1.5 text-[12px] font-medium text-slate-600 bg-slate-50 border border-slate-200 pl-2 pr-2.5 rounded-md"
+                >
+                  <TechIcon name={t} className="w-3 h-3 text-slate-400" />
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Links — kein Button, wenn keine URL vorhanden ist */}
         {hasLinks && (
           <div className="flex flex-wrap gap-2.5">
             {project.githubUrl && (
@@ -225,6 +245,9 @@ const ProjectCard = memo(function ProjectCard({ project }: { project: Project })
               />
             )}
           </div>
+        )}
+        {showRepoHint && (
+          <p className="text-[12.5px] text-slate-400 italic">Repository auf Anfrage</p>
         )}
       </div>
     </article>
