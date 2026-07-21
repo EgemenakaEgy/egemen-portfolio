@@ -1,14 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 const navLinks = [
-  { label: "Über mich", href: "#about" },
-  { label: "Skills", href: "#skills" },
-  { label: "Erfahrung", href: "#experience" },
-  { label: "Projekte", href: "#projects" },
-  { label: "Lebenslauf", href: "#resume" },
-  { label: "Kontakt", href: "#contact" },
+  { label: "Über mich", href: "/#about" },
+  { label: "Skills", href: "/#skills" },
+  { label: "Erfahrung", href: "/#experience" },
+  { label: "Projekte", href: "/#projects" },
+  { label: "Lebenslauf", href: "/#resume" },
+  { label: "Kontakt", href: "/#contact" },
 ];
 
 export default function Navigation() {
@@ -47,23 +48,23 @@ export default function Navigation() {
         style={{ height: "68px" }}
       >
         {/* Wordmark */}
-        <a
-          href="#home"
+        <Link
+          href="/"
           className="text-[16px] font-semibold text-slate-900 tracking-[-0.02em] hover:text-blue-600 transition-colors duration-200 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40 focus-visible:ring-offset-2"
         >
           Egemen Demir
-        </a>
+        </Link>
 
         {/* Desktop links */}
         <div className="hidden md:flex items-center gap-6">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
               className="relative text-[13.5px] font-medium text-slate-500 hover:text-slate-900 transition-colors duration-200 tracking-wide py-1 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40 focus-visible:ring-offset-2 after:content-[''] after:absolute after:left-0 after:-bottom-0.5 after:h-px after:w-0 after:bg-slate-900 after:transition-all after:duration-300 after:ease-[cubic-bezier(0.16,1,0.3,1)] hover:after:w-full"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </div>
 
@@ -105,14 +106,14 @@ export default function Navigation() {
       >
         <div className="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-1">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
               onClick={() => setMenuOpen(false)}
               className="text-[15px] font-medium text-slate-700 hover:text-blue-600 transition-colors py-2 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </div>
       </div>

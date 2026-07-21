@@ -34,12 +34,12 @@ export default function Footer() {
     <footer className="border-t border-slate-100 bg-white">
       <div className="max-w-6xl mx-auto px-6 lg:px-8 py-10 flex flex-col sm:flex-row items-center justify-between gap-6">
         <div className="flex flex-col items-center sm:items-start gap-1">
-          <a
-            href="#home"
+          <Link
+            href="/"
             className="text-[14px] font-semibold text-slate-800 hover:text-blue-600 transition-colors duration-200 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40"
           >
             Egemen Demir
-          </a>
+          </Link>
           <p className="text-[12.5px] text-slate-500">
             © {year} · Gießen, Deutschland
           </p>
@@ -77,15 +77,15 @@ export default function Footer() {
 
           <span className="w-px h-5 bg-slate-200 mx-1 hidden sm:block" aria-hidden="true" />
 
-          <a
-            href="#home"
+          <Link
+            href="/#home"
             className="hidden sm:inline-flex items-center gap-1.5 text-[12.5px] font-medium text-slate-500 hover:text-slate-700 transition-colors duration-200 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40"
           >
             Nach oben
             <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
             </svg>
-          </a>
+          </Link>
         </div>
       </div>
     </footer>
