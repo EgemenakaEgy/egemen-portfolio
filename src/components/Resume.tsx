@@ -5,7 +5,7 @@ import type { RefObject } from "react";
 import { SectionEyebrow } from "@/components/SectionEyebrow";
 import { revealStyle } from "@/lib/motion";
 
-const CV_AVAILABLE = false;
+const CV_AVAILABLE = true;
 const CV_PATH = "/documents/lebenslauf-egemen-demir.pdf";
 
 export default function Resume() {
@@ -31,7 +31,8 @@ export default function Resume() {
             </h2>
 
             <p className="text-[16px] text-slate-500 leading-relaxed text-pretty mb-10 max-w-lg">
-              Der vollständige Lebenslauf als PDF steht in Kürze zur Verfügung.
+              Der vollständige Lebenslauf steht als PDF zum Ansehen und
+              Download bereit.
             </p>
 
             <div className="flex flex-wrap gap-3">
@@ -41,6 +42,7 @@ export default function Resume() {
                     href={CV_PATH}
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label="Lebenslauf als PDF ansehen (öffnet in neuem Tab)"
                     className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2.5 rounded-lg text-[14.5px] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-px active:scale-[0.98] hover:shadow-lg hover:shadow-blue-200/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40 focus-visible:ring-offset-2"
                   >
                     Lebenslauf ansehen
@@ -50,7 +52,8 @@ export default function Resume() {
                   </a>
                   <a
                     href={CV_PATH}
-                    download
+                    download="Lebenslauf-Egemen-Demir.pdf"
+                    aria-label="Lebenslauf als PDF herunterladen"
                     className="inline-flex items-center gap-2 bg-white hover:bg-slate-50 text-slate-800 font-semibold px-5 py-2.5 rounded-lg text-[14.5px] border border-slate-200 hover:border-slate-300 transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-px active:scale-[0.98] hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300/60 focus-visible:ring-offset-2"
                   >
                     PDF herunterladen
