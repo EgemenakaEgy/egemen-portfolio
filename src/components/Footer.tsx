@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { GitHubMarkIcon } from "@/components/icons";
 
 const socialLinks = [
@@ -42,6 +43,21 @@ export default function Footer() {
           <p className="text-[12.5px] text-slate-500">
             © {year} · Gießen, Deutschland
           </p>
+          <div className="flex items-center gap-3 text-[12px] text-slate-400">
+            <Link
+              href="/impressum"
+              className="hover:text-slate-600 transition-colors duration-200 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40"
+            >
+              Impressum
+            </Link>
+            <span aria-hidden="true">·</span>
+            <Link
+              href="/datenschutz"
+              className="hover:text-slate-600 transition-colors duration-200 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40"
+            >
+              Datenschutz
+            </Link>
+          </div>
         </div>
 
         <div className="flex items-center gap-3">
