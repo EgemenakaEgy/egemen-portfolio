@@ -2,7 +2,7 @@
 
 import { useInView } from "@/hooks/useInView";
 import type { RefObject } from "react";
-import { ArrowUpRightIcon } from "@/components/icons";
+import { ArrowUpRightIcon, GitHubMarkIcon } from "@/components/icons";
 import { SectionEyebrow } from "@/components/SectionEyebrow";
 import { revealStyle } from "@/lib/motion";
 
@@ -38,6 +38,12 @@ const contactItems = [
       </svg>
     ),
   },
+  {
+    label: "GitHub",
+    value: "github.com/EgemenakaEgy",
+    href: "https://github.com/EgemenakaEgy",
+    icon: <GitHubMarkIcon className="w-5 h-5" />,
+  },
 ];
 
 export default function Contact() {
@@ -67,7 +73,7 @@ export default function Contact() {
               oder Projekten — schreib mir gerne direkt.
             </p>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {contactItems.map((item, i) => (
                 <div
                   key={item.label}

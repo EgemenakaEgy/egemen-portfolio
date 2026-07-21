@@ -1,6 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { GitHubMarkIcon } from "@/components/icons";
+
+const GITHUB_URL = "https://github.com/EgemenakaEgy";
 
 const roles = [
   "IT-Support",
@@ -110,6 +113,16 @@ export default function Hero() {
                 className="inline-flex items-center gap-2 bg-white hover:bg-slate-50 active:bg-slate-100 text-slate-800 font-semibold px-5 py-2.5 rounded-lg text-[14.5px] border border-slate-200 hover:border-slate-300 transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-px active:translate-y-0 active:scale-[0.98] hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300/60 focus-visible:ring-offset-2"
               >
                 Kontakt
+              </a>
+              <a
+                href={GITHUB_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub-Profil ansehen (öffnet in neuem Tab)"
+                className="inline-flex items-center gap-2 bg-white hover:bg-slate-50 active:bg-slate-100 text-slate-800 font-semibold px-5 py-2.5 rounded-lg text-[14.5px] border border-slate-200 hover:border-slate-300 transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-px active:translate-y-0 active:scale-[0.98] hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300/60 focus-visible:ring-offset-2"
+              >
+                <GitHubMarkIcon className="w-4 h-4" />
+                GitHub ansehen
               </a>
             </div>
           </div>
