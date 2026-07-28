@@ -24,9 +24,8 @@ const experiences: ExperienceEntry[] = [
     context: "Projektumfeld UKGM",
     period: "06/2025 – 09/2025",
     tasks: [
-      "Weiterentwicklung und inhaltliche Pflege einer Projekt-Homepage auf Basis eines bestehenden Templates",
-      "Gestalterische Überarbeitung einzelner Unterseiten",
-      "Abstimmung mit dem Projektteam",
+      "Weiterentwicklung und inhaltliche Pflege der Projekt-Homepage auf Basis eines vorgegebenen Templates",
+      "Gestalterische Überarbeitung einzelner Unterseiten in enger Abstimmung mit dem Projektteam",
     ],
     primary: true,
     icon: "web",
@@ -37,12 +36,8 @@ const experiences: ExperienceEntry[] = [
     context: "",
     period: "seit 04/2025",
     tasks: [
-      "Eigenständige Durchführung von Tutorien",
-      "Vermittlung von Lehrinhalten",
-      "Klausurvorbereitung mit Studierenden",
-      "Kontrolle und Besprechung von Abgaben",
-      "Unterstützung des Professors",
-      "Bei Bedarf selbstständige Leitung von Lehrveranstaltungen",
+      "Eigenständige Durchführung von Tutorien in BWL 1 (laufend) sowie BWL 1 und BWL 2 im Wintersemester 2025/26",
+      "Vermittlung von Lehrinhalten und Klausurvorbereitung für Studierende der Studieneingangsphase",
     ],
     primary: true,
     icon: "teaching",
@@ -53,10 +48,8 @@ const experiences: ExperienceEntry[] = [
     context: "Selbstständig",
     period: "2016 – 2023",
     tasks: [
-      "Konzeption, Gestaltung und Umsetzung von ca. 6–7 Kundenwebsites (überwiegend mit Wix)",
-      "Kundenberatung und inhaltliche Einrichtung",
-      "Unterstützung bei Domain-Themen",
-      "Technischer Support und Fehlerbehebung",
+      "Konzeption, Entwicklung und technische Betreuung von ca. 6–7 Kundenwebsites (u. a. mit PHP, JavaScript und Bootstrap sowie Wix)",
+      "Eigenverantwortliche Kundenberatung sowie technischer Support inklusive Wartung und Fehlerbehebung",
     ],
     primary: true,
     icon: "business",
@@ -67,10 +60,8 @@ const experiences: ExperienceEntry[] = [
     context: "Studentisches Ehrenamt",
     period: "2021 – 2024",
     tasks: [
-      "Planung und Organisation studentischer Veranstaltungen",
-      "Koordination von Teams",
-      "Abstimmung mit internen und externen Beteiligten",
-      "Budget- und Ablaufplanung",
+      "Eigenverantwortliche Planung, Organisation und Durchführung studentischer Veranstaltungen",
+      "Koordination von Teams, Budgetverantwortung sowie Abstimmung mit internen und externen Beteiligten",
     ],
     primary: false,
     icon: "event",
@@ -109,7 +100,7 @@ const ExperienceCard = memo(function ExperienceCard({
             className={
               entry.primary
                 ? "text-[13.5px] font-medium text-slate-500 tracking-tight leading-snug"
-                : "text-[12.5px] font-medium text-slate-400 tracking-tight leading-snug"
+                : "text-[12.5px] font-medium text-slate-500 tracking-tight leading-snug"
             }
           >
             {entry.title}
@@ -128,7 +119,7 @@ const ExperienceCard = memo(function ExperienceCard({
         >
           {entry.company}
           {entry.context && (
-            <span className={entry.primary ? "text-slate-500 font-normal" : "text-slate-400 font-normal"}>
+            <span className="text-slate-500 font-normal">
               {" "}
               · {entry.context}
             </span>

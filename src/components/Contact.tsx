@@ -8,16 +8,6 @@ import { revealStyle } from "@/lib/motion";
 
 const contactItems = [
   {
-    label: "E-Mail",
-    value: "egemen.demir@mni.thm.de",
-    href: "mailto:egemen.demir@mni.thm.de",
-    icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-      </svg>
-    ),
-  },
-  {
     label: "LinkedIn",
     value: "egemen-demir",
     href: "https://www.linkedin.com/in/egemen-demir",
@@ -73,7 +63,7 @@ export default function Contact() {
               oder Projekten — schreib mir gerne direkt.
             </p>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
               {contactItems.map((item, i) => (
                 <div
                   key={item.label}
@@ -103,7 +93,7 @@ export default function Contact() {
                       </span>
                     </a>
                   ) : (
-                    <div className="flex flex-col gap-3.5 bg-white border border-slate-100 rounded-xl p-5 sm:p-6 h-full min-w-0">
+                    <div className="flex flex-col gap-3.5 bg-white border border-slate-200 rounded-xl p-5 sm:p-6 h-full min-w-0">
                       <span className="flex items-center justify-center w-10 h-10 rounded-lg bg-slate-50 text-slate-500">
                         {item.icon}
                       </span>

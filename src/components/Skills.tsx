@@ -6,86 +6,51 @@ import { CategoryIcon, TechIcon } from "@/components/icons";
 import { SectionEyebrow } from "@/components/SectionEyebrow";
 import { revealStyle } from "@/lib/motion";
 
-const COMPETENCE_LEVELS = 4;
-
-type LeveledSkill = {
-  name: string;
-  /** Kompetenzstufe von 1 (Grundkenntnisse) bis 4 (sehr sicher) — keine Prozentangabe. */
-  level: 1 | 2 | 3 | 4;
+type SkillCategory = {
+  label: string;
+  skills: string[];
 };
-
-type SkillCategory =
-  | { label: string; showLevel: true; skills: LeveledSkill[] }
-  | { label: string; showLevel: false; skills: string[] };
 
 const skillCategories: SkillCategory[] = [
   {
-    label: "Sprachen & Web",
-    showLevel: true,
-    skills: [
-      { name: "HTML", level: 4 },
-      { name: "CSS", level: 3 },
-      { name: "Java", level: 1 },
-      { name: "TypeScript", level: 2 },
-      { name: "SQL", level: 2 },
-      { name: "Node.js", level: 2 },
-    ],
+    label: "Languages",
+    skills: ["TypeScript", "JavaScript", "Java", "PHP", "SQL", "HTML", "CSS"],
   },
   {
-    label: "Datenbanken & Infrastruktur",
-    showLevel: true,
-    skills: [
-      { name: "PostgreSQL", level: 2 },
-      { name: "Redis", level: 2 },
-      { name: "Docker", level: 3 },
-      { name: "Git", level: 3 },
-    ],
+    label: "Frontend",
+    skills: ["React", "Next.js", "Tailwind CSS", "Bootstrap"],
+  },
+  {
+    label: "Backend",
+    skills: ["Node.js", "Express"],
+  },
+  {
+    label: "Database",
+    skills: ["PostgreSQL", "Redis"],
   },
   {
     label: "Tools",
-    showLevel: false,
     skills: [
+      "Docker",
+      "Git",
       "GitHub",
-      "WebStorm",
       "Visual Studio Code",
+      "WebStorm",
+      "Figma",
       "Canva",
       "Microsoft Office",
       "LaTeX",
       "Wix",
-      "Figma",
     ],
   },
 ];
 
-/** Dezente 4-stufige Kompetenzanzeige — bewusst ohne Prozentangabe. */
-function CompetenceBar({ level }: { level: number }) {
-  return (
-    <div
-      className="flex items-center gap-1"
-      role="img"
-      aria-label={`Kompetenzstufe ${level} von ${COMPETENCE_LEVELS}`}
-    >
-      {Array.from({ length: COMPETENCE_LEVELS }, (_, i) => i + 1).map((segment) => (
-        <span
-          key={segment}
-          aria-hidden="true"
-          className={`h-1.5 flex-1 rounded-full transition-colors duration-200 ${
-            segment <= level
-              ? "bg-blue-500 group-hover/skill:bg-blue-600"
-              : "bg-slate-200 group-hover/skill:bg-slate-300"
-          }`}
-        />
-      ))}
-    </div>
-  );
-}
-
 const cardClassName =
-  "group/skill h-full flex flex-col bg-white border border-slate-200 px-3 py-2.5 rounded-lg shadow-sm hover:border-blue-300 hover:shadow-md hover:shadow-blue-50/80 hover:-translate-y-0.5 transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] cursor-default min-w-0";
+  "group/skill flex items-center gap-2.5 bg-white border border-slate-200 px-3 py-2.5 rounded-lg shadow-sm hover:border-blue-300 hover:shadow-md hover:shadow-blue-50/80 hover:-translate-y-0.5 transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] cursor-default min-w-0";
 
-function SkillIconLabel({ name }: { name: string }) {
+function SkillCard({ name }: { name: string }) {
   return (
-    <div className="flex items-center gap-2.5 min-w-0">
+    <div className={cardClassName}>
       <span className="flex items-center justify-center w-7 h-7 shrink-0 rounded-md bg-slate-50 text-slate-500 group-hover/skill:bg-blue-50 group-hover/skill:text-blue-600 transition-colors duration-200">
         <TechIcon name={name} className="w-4 h-4" />
       </span>
@@ -133,21 +98,16 @@ export default function Skills() {
                       {category.label}
                     </p>
                   </div>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-                    {category.showLevel
-                      ? category.skills.map((skill) => (
-                          <div key={skill.name} className={cardClassName}>
-                            <SkillIconLabel name={skill.name} />
-                            <div className="mt-3">
-                              <CompetenceBar level={skill.level} />
-                            </div>
-                          </div>
-                        ))
-                      : category.skills.map((skill) => (
-                          <div key={skill} className={cardClassName}>
-                            <SkillIconLabel name={skill} />
-                          </div>
-                        ))}
+                  <div className={`grid gap-3 ${
+                    category.skills.length <= 2
+                      ? "grid-cols-2"
+                      : category.skills.length === 3
+                      ? "grid-cols-2 sm:grid-cols-3"
+                      : "grid-cols-2 sm:grid-cols-3 lg:grid-cols-4"
+                  }`}>
+                    {category.skills.map((skill) => (
+                      <SkillCard key={skill} name={skill} />
+                    ))}
                   </div>
                 </div>
               ))}

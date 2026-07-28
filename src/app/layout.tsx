@@ -12,9 +12,35 @@ const jakartaSans = Plus_Jakarta_Sans({
 // Domain: egemendemir.de. Per NEXT_PUBLIC_SITE_URL überschreibbar (z. B. für Preview-Deployments).
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://egemendemir.de";
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Egemen Demir",
+  url: siteUrl,
+  sameAs: [
+    "https://github.com/EgemenakaEgy",
+    "https://www.linkedin.com/in/egemen-demir",
+  ],
+  jobTitle: "Werkstudent",
+  description:
+    "Werkstudent für Softwareentwicklung, Webentwicklung, Full-Stack-Entwicklung, IT-Support und IT-Administration.",
+  alumniOf: {
+    "@type": "CollegeOrUniversity",
+    name: "Technische Hochschule Mittelhessen",
+    url: "https://www.thm.de",
+  },
+  knowsAbout: [
+    "Webentwicklung",
+    "Softwareentwicklung",
+    "IT-Support",
+    "IT-Administration",
+    "Full-Stack-Entwicklung",
+  ],
+};
+
 const title = "Egemen Demir — Digital Media Systems";
 const description =
-  "Portfolio von Egemen Demir — Werkstudent für IT-Support, Webentwicklung, IT-Administration und Projektmanagement.";
+  "Portfolio von Egemen Demir — Werkstudent für Softwareentwicklung, Webentwicklung, Full-Stack-Entwicklung, IT-Support und IT-Administration.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -26,12 +52,13 @@ export const metadata: Metadata = {
   keywords: [
     "Egemen Demir",
     "Werkstudent",
-    "IT-Support",
+    "Softwareentwicklung",
     "Webentwicklung",
+    "Full-Stack-Entwicklung",
+    "IT-Support",
     "IT-Administration",
-    "Projektmanagement",
     "Digital Media Systems",
-    "THM Mittelhessen",
+    "Technische Hochschule Mittelhessen",
   ],
   authors: [{ name: "Egemen Demir" }],
   creator: "Egemen Demir",
@@ -76,6 +103,10 @@ export default function RootLayout({
   return (
     <html lang="de" className={`${jakartaSans.variable} antialiased`}>
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-blue-600 focus:text-white focus:text-[14px] focus:font-semibold focus:px-4 focus:py-2.5 focus:rounded-lg focus:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-blue-600"

@@ -16,15 +16,6 @@ const socialLinks = [
       </svg>
     ),
   },
-  {
-    label: "E-Mail",
-    href: "mailto:egemen.demir@mni.thm.de",
-    icon: (
-      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.6} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-      </svg>
-    ),
-  },
 ];
 
 export default function Footer() {
@@ -43,7 +34,7 @@ export default function Footer() {
           <p className="text-[12.5px] text-slate-500">
             © {year} · Gießen, Deutschland
           </p>
-          <div className="flex items-center gap-3 text-[12px] text-slate-400">
+          <div className="flex items-center gap-3 text-[12px] text-slate-500">
             <Link
               href="/impressum"
               className="hover:text-slate-600 transition-colors duration-200 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40"

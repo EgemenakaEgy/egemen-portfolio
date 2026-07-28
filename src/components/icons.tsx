@@ -51,6 +51,22 @@ const techPaths: Record<string, ReactNode> = {
       </text>
     </>
   ),
+  JavaScript: (
+    <>
+      <rect x="3" y="3" width="18" height="18" rx="4" />
+      <text x="12" y="16" textAnchor="middle" fontSize="9" fontWeight={700} fill="currentColor" stroke="none">
+        JS
+      </text>
+    </>
+  ),
+  PHP: (
+    <>
+      <rect x="3" y="3" width="18" height="18" rx="4" />
+      <text x="12" y="15.5" textAnchor="middle" fontSize="7.5" fontWeight={700} fill="currentColor" stroke="none">
+        PHP
+      </text>
+    </>
+  ),
   SQL: (
     <>
       <ellipse cx="12" cy="6" rx="7.5" ry="2.7" />
@@ -62,6 +78,42 @@ const techPaths: Record<string, ReactNode> = {
     <>
       <path d="M12 2.5l8 4.6v9.8L12 21.5l-8-4.6V7.1L12 2.5z" />
       <path d="M9 10l3 1.7L15 10M12 11.7v4.8" strokeOpacity={0.55} />
+    </>
+  ),
+  React: (
+    <>
+      <ellipse cx="12" cy="12" rx="9" ry="3.6" />
+      <ellipse cx="12" cy="12" rx="9" ry="3.6" transform="rotate(60 12 12)" />
+      <ellipse cx="12" cy="12" rx="9" ry="3.6" transform="rotate(120 12 12)" />
+      <circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none" />
+    </>
+  ),
+  "Next.js": (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M9 8.5v7M9 8.5l6.5 8.3M15.5 8.5v6" strokeOpacity={0.85} />
+    </>
+  ),
+  "Tailwind CSS": (
+    <>
+      <path d="M4 12.5c1-3 2.6-4.5 5-4.5 3.2 0 3.7 2.4 5.7 2.9 1.6.4 3-.2 4.3-1.9-1 3-2.6 4.5-5 4.5-3.2 0-3.7-2.4-5.7-2.9-1.6-.4-3 .2-4.3 1.9z" />
+      <path d="M4 18c1-3 2.6-4.5 5-4.5 3.2 0 3.7 2.4 5.7 2.9 1.6.4 3-.2 4.3-1.9" strokeOpacity={0.55} />
+    </>
+  ),
+  Express: (
+    <>
+      <rect x="3" y="3" width="18" height="18" rx="4" />
+      <text x="12" y="15.5" textAnchor="middle" fontSize="7.5" fontWeight={700} fill="currentColor" stroke="none">
+        EX
+      </text>
+    </>
+  ),
+  Bootstrap: (
+    <>
+      <rect x="3" y="3" width="18" height="18" rx="4" />
+      <text x="12" y="16" textAnchor="middle" fontSize="9" fontWeight={700} fill="currentColor" stroke="none">
+        B
+      </text>
     </>
   ),
   PostgreSQL: (
@@ -171,12 +223,27 @@ export function TechIcon({ name, className = "w-4.5 h-4.5" }: IconProps & { name
 /* ---------- Kategorie-Icons (Skills-Sektion) ---------- */
 
 const categoryPaths: Record<string, ReactNode> = {
-  "Sprachen & Web": <path d="M9 18l-5-6 5-6M15 6l5 6-5 6" />,
-  "Datenbanken & Infrastruktur": (
+  Languages: <path d="M9 18l-5-6 5-6M15 6l5 6-5 6" />,
+  Frontend: (
+    <>
+      <rect x="3" y="4" width="18" height="16" rx="2" />
+      <path d="M3 8.5h18" strokeOpacity={0.5} />
+      <circle cx="6" cy="6.3" r="0.6" fill="currentColor" stroke="none" />
+    </>
+  ),
+  Backend: (
     <>
       <ellipse cx="12" cy="6" rx="7.5" ry="2.7" />
       <path d="M4.5 6v5.5c0 1.5 3.4 2.7 7.5 2.7s7.5-1.2 7.5-2.7V6" />
       <path d="M4.5 11.5V17c0 1.5 3.4 2.7 7.5 2.7s7.5-1.2 7.5-2.7v-5.5" />
+    </>
+  ),
+  Database: (
+    <>
+      <ellipse cx="12" cy="5.5" rx="7" ry="2.4" />
+      <path d="M5 5.5v6.5c0 1.3 3.1 2.4 7 2.4s7-1.1 7-2.4V5.5" />
+      <path d="M12 14.4V19" />
+      <path d="M9 19h6" />
     </>
   ),
   Tools: (
@@ -240,16 +307,6 @@ export function GitHubMarkIcon({ className = "w-4 h-4" }: IconProps) {
   return <Svg className={className}>{techPaths.GitHub}</Svg>;
 }
 
-export function ImagePlaceholderIcon({ className = "w-7 h-7" }: IconProps) {
-  return (
-    <Svg className={className}>
-      <rect x="3" y="4" width="18" height="16" rx="2" />
-      <circle cx="9" cy="10" r="1.6" />
-      <path d="M3 16l5-4.5 4 3.5 3-2.5 6 5" />
-    </Svg>
-  );
-}
-
 /* ---------- Sonstige UI-Icons ---------- */
 
 export function ArrowUpRightIcon({ className = "w-3.5 h-3.5" }: IconProps) {
@@ -269,10 +326,3 @@ export function CheckIcon({ className = "w-4 h-4" }: IconProps) {
   );
 }
 
-export function ChevronDownIcon({ className = "w-3.5 h-3.5" }: IconProps) {
-  return (
-    <Svg className={className}>
-      <path d="M6 9l6 6 6-6" />
-    </Svg>
-  );
-}

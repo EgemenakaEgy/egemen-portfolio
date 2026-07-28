@@ -23,11 +23,11 @@ type Project = {
   task: string;
   solution: string;
   result: string;
+  /** Was dabei vertieft/gelernt wurde. */
+  learned: string;
   /** Konkrete Beiträge/Ergebnisse als Stichpunkte. */
   highlights: string[];
   tech: string[];
-  // TODO: Sobald verfügbar, echte Links ergänzen (keine Platzhalter-URLs).
-  // Buttons erscheinen automatisch, sobald hier eine URL eingetragen ist.
   githubUrl?: string;
   demoUrl?: string;
   /** Nur setzen, wenn ein Repository grundsätzlich teilbar ist (kein Kunden-/NDA-Projekt). */
@@ -48,6 +48,8 @@ const projects: Project[] = [
       "Vollständig eigenständig entwickelte Unternehmenswebsite für eine Naturheilpraxis — von der Konzeption bis zur technischen Umsetzung.",
     result:
       "Eine vollständige, live geschaltete Unternehmenswebsite für die Naturheilpraxis YaseMed mit Leistungsübersicht, Praxisvorstellung und Kontaktmöglichkeiten.",
+    learned:
+      "Eigenständige Umsetzung eines kompletten Webprojekts – von der Konzeption über das Design bis zur Content-Optimierung für einen professionellen Webauftritt.",
     highlights: [
       "Konzeption der Seitenstruktur und Navigation",
       "Inhaltliche Ausarbeitung von Leistungen und Praxisvorstellung",
@@ -70,6 +72,8 @@ const projects: Project[] = [
       "Beitrag zu Echtzeit-Zusammenarbeit sowie zu Kommentar-, Review- und Versionsverlauf-Funktionen, dazu technische Dokumentation und Fehleranalyse im Team.",
     result:
       "Eine im Hochschulprojekt eingesetzte, kollaborative Webanwendung für SQL-Übungen mit gemeinsamem Editor, Kommentaren, Review-System und Versionsverwaltung.",
+    learned:
+      "Zusammenarbeit im Team an einer Anwendung mit Echtzeit-Funktionen sowie strukturierte technische Dokumentation und Fehleranalyse.",
     highlights: [
       "Integration und Tests von Echtzeit-Zusammenarbeit",
       "Mitarbeit an Kommentaren, Review-Funktionen und Versionsverlauf",
@@ -164,12 +168,13 @@ const ProjectCard = memo(function ProjectCard({ project }: { project: Project })
           </p>
         </div>
 
-        {/* Problem / Aufgabe / Lösung / Ergebnis */}
+        {/* Problem / Aufgabe / Lösung / Ergebnis / Gelernt */}
         <div className="space-y-4 mb-6">
           <CaseStudyField label="Problem" text={project.problem} />
           <CaseStudyField label="Meine Aufgabe" text={project.task} />
           <CaseStudyField label="Lösung" text={project.solution} />
           <CaseStudyField label="Ergebnis" text={project.result} />
+          <CaseStudyField label="Gelernt" text={project.learned} />
         </div>
 
         {/* Highlights */}
@@ -231,7 +236,7 @@ const ProjectCard = memo(function ProjectCard({ project }: { project: Project })
           </div>
         )}
         {showRepoHint && (
-          <p className="text-[12.5px] text-slate-400 italic">Repository auf Anfrage</p>
+          <p className="text-[12.5px] text-slate-500 italic">Repository auf Anfrage</p>
         )}
       </div>
     </article>

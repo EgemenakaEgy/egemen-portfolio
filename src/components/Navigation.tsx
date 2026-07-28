@@ -50,7 +50,7 @@ export default function Navigation() {
         {/* Wordmark */}
         <Link
           href="/"
-          className="text-[16px] font-semibold text-slate-900 tracking-[-0.02em] hover:text-blue-600 transition-colors duration-200 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40 focus-visible:ring-offset-2"
+          className="text-[17.5px] font-semibold text-slate-900 tracking-[-0.02em] hover:text-blue-600 transition-colors duration-200 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40 focus-visible:ring-offset-2"
         >
           Egemen Demir
         </Link>
