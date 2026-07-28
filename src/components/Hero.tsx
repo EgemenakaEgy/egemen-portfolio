@@ -6,9 +6,7 @@ import { GitHubMarkIcon } from "@/components/icons";
 const GITHUB_URL = "https://github.com/EgemenakaEgy";
 
 const roles = [
-  "Softwareentwicklung",
   "Webentwicklung",
-  "Full-Stack-Entwicklung",
   "IT-Support",
   "IT-Administration",
 ];

@@ -23,7 +23,7 @@ const jsonLd = {
   ],
   jobTitle: "Werkstudent",
   description:
-    "Werkstudent für Softwareentwicklung, Webentwicklung, Full-Stack-Entwicklung, IT-Support und IT-Administration.",
+    "Werkstudent für Webentwicklung, IT-Support und IT-Administration.",
   alumniOf: {
     "@type": "CollegeOrUniversity",
     name: "Technische Hochschule Mittelhessen",
@@ -31,16 +31,14 @@ const jsonLd = {
   },
   knowsAbout: [
     "Webentwicklung",
-    "Softwareentwicklung",
     "IT-Support",
     "IT-Administration",
-    "Full-Stack-Entwicklung",
   ],
 };
 
 const title = "Egemen Demir — Digital Media Systems";
 const description =
-  "Portfolio von Egemen Demir — Werkstudent für Softwareentwicklung, Webentwicklung, Full-Stack-Entwicklung, IT-Support und IT-Administration.";
+  "Portfolio von Egemen Demir — Werkstudent für Webentwicklung, IT-Support und IT-Administration.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -52,9 +50,7 @@ export const metadata: Metadata = {
   keywords: [
     "Egemen Demir",
     "Werkstudent",
-    "Softwareentwicklung",
     "Webentwicklung",
-    "Full-Stack-Entwicklung",
     "IT-Support",
     "IT-Administration",
     "Digital Media Systems",

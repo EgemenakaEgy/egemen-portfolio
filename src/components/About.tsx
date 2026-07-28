@@ -40,8 +40,7 @@ export default function About() {
               <p className="text-[16.5px] text-slate-600 leading-[1.8] text-pretty">
                 Ich arbeite strukturiert und bin dort produktiv, wo Technik und
                 Kommunikation zusammenkommen. Aktuell suche ich eine
-                Werkstudentenstelle in Softwareentwicklung, Webentwicklung,
-                Full-Stack-Entwicklung, IT-Support oder IT-Administration —
+                Werkstudentenstelle in Webentwicklung, IT-Support oder IT-Administration —
                 verfügbar in Gießen und Frankfurt am Main.
               </p>
             </div>
